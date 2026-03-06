@@ -15,4 +15,7 @@
     <br />
     <input type="submit" value="submit" />
 </form>
+    {% load socialaccount %}
+    <h2>Google login</h2>
+    <a href="{% provider_login_url 'google' next='/' %}">Login with Google</a>
 {% endblock %}

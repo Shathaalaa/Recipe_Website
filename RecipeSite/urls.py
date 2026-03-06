@@ -25,4 +25,6 @@ urlpatterns = [
     path('recipes/',include('recipes.urls')),
     # The above maps any URLs starting with recipes/ to be handled by rango.
     path('admin/', admin.site.urls),
+    path("accounts/", include("allauth.urls")),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
