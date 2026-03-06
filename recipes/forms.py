@@ -9,13 +9,25 @@ class AddRecipeForm(forms.ModelForm):
     ]
     title = forms.CharField(max_length=50,
                             help_text= "Enter the title of the recipe.")
+    category = forms.ChoiceField(choices=CATEGORY_CHOICES)
+    image = forms.ImageField()
     description = forms.CharField(
         widget=forms.Textarea(attrs={'rows': 5}), 
-        help_text="Describe the ingredients and steps."
+        help_text="Describe the recipe."
     )
-    image = forms.ImageField()
-    category = forms.ChoiceField(choices=CATEGORY_CHOICES)
-
+    prep_time = forms.IntegerField()
+    cook_time = forms.IntegerField()
+    total_time = forms.IntegerField()
+    serving_time = forms.IntegerField()
+    ingredients = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 5}), 
+        help_text="What ingredients are used"
+    )
+    steps = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 5}), 
+        help_text="Describe the steps."
+    )
+    
     class Meta:
         model = Recipe
         fields = ('title','description','image','category')
