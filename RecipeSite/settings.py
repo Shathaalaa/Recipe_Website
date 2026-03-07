@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 ]
 
-SOCIAL_ACCOUNT_PROVIDERS = {
+SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "SCOPE" : [
             "profile",
