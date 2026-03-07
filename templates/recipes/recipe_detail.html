@@ -1,0 +1,21 @@
+<!-- templates/recipes/recipe_detail.html -->
+{% extends 'core/base.html' %}
+{% block body_class %}{% endblock %}
+{% block title %}
+Recipes| {{ recipe.title }}
+{% endblock %}
+
+{% block content %}
+<h1>{{ recipe.title }}</h1>
+<p>{{ recipe.description }}</p>
+
+
+<h3>Ingredients</h3>
+<ul>
+    {% for item in recipe.ingredients_list %}
+    <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'recipes:recipe_list' %}">Back to Recipes</a>
+{% endblock %}

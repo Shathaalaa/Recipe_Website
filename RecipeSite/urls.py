@@ -21,4 +21,5 @@ from django.urls import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cookDo/', include('core.urls')),
+    path('recipes/', include('recipes.urls')),
 ]
