@@ -28,10 +28,10 @@
 <div class="recipe-card" data-name="{{ recipe.title|lower }}">
     <div class="recipe-user">
         <i class="fa-regular fa-user"></i>
-        {{ recipe.username }}
+        {{ recipe.author.username }}
     </div>
 
-    <img src="{{ recipe.image }}" alt="{{ recipe.title }}">
+    <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
 
     <div class="recipe-info">
         <p><strong>Dish:</strong> {{ recipe.title }}</p>

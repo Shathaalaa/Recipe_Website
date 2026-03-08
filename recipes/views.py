@@ -1,40 +1,18 @@
 from django.shortcuts import render
-
-recipes_data = [
-    {
-        "id": 1,
-        "title": "Shakshuka",
-        "image": "https://images.unsplash.com/photo-1598514983318-2f64f8f4796c",
-        "category": "Middle Eastern",
-        "username": "Shatha",
-        "description": "A flavorful Middle Eastern dish of poached eggs simmered in a spiced tomato and pepper sauce, often served with warm bread for dipping."
-    },
-    {
-        "id": 2,
-        "title": "Fruit Bowl",
-        "image": "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea",
-        "category": "Vegetarian",
-        "username": "Sara",
-        "description": "A refreshing mix of crisp vegetables, olives, feta cheese, and a light olive oil dressing, inspired by the bright flavors of the Mediterranean."
-    },
-    {
-        "id": 3,
-        "title": "Chicken Skewers",
-        "image": "https://images.unsplash.com/photo-1608756687911-aa1599ab3bd9",
-        "category": "Asian",
-        "username": "Ali",
-        "description": "Golden and crunchy fried chicken with a juicy and tender inside, seasoned with a blend of herbs and spices."
-    },
-]
+from django.shortcuts import render,redirect
+from .forms import AddRecipeForm
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+from .models import Recipe, Comment, Like
+from django.http import JsonResponse
 
 def recipe_list(request, category=None):
-
-    recipes = recipes_data
-
     if category:
-        recipes = [r for r in recipes if r["category"].lower() == category.lower()]
+        recipes = Recipe.objects.filter(category__iexact=category)
+    else:
+        recipes = Recipe.objects.all()
 
-    categories = [ "Vegetarian", "Asian", "Middle Eastern", "American", "Side dishes", "Drinks", "Deserts", "Italian"]
+    categories = [ "Vegetarian", "Asian", "Middle Eastern", "American", "Side dishes", "Drinks", "Desserts", "Italian"]
 
     return render(request, "recipes/recipe_list.html", {
         "recipes": recipes,
@@ -43,20 +21,77 @@ def recipe_list(request, category=None):
     })
 
 def recipe_by_category(request, category_name):
-    recipes = Recipe.objects.filter(category=category_name)
+
+    recipes = Recipe.objects.filter(category__iexact=category_name)
+
     categories = Recipe.objects.values_list('category', flat=True).distinct()
+
     context = {
         'recipes': recipes,
         'categories': categories,
         'selected_category': category_name
     }
+
     return render(request, 'recipes/recipe_list.html', context)
 
 def recipe_detail(request, recipe_id):
-    recipes = [
-        {'id': 1, 'title': 'Spaghetti Carbonara', 'description': 'Classic Italian', 'ingredients': 'Spaghetti,Eggs,Cheese,Pancetta', 'instructions': 'Boil pasta...'},
-    ]
-    recipe = next((r for r in recipes if r['id'] == recipe_id), None)
-    if recipe:
-        recipe['ingredients_list'] = recipe['ingredients'].split(',')
-    return render(request, 'recipes/recipe_detail.html', {'recipe': recipe})
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    ingredients_list = recipe.ingredients.split(',')
+    recipe_steps = recipe.steps.split('.')[:-1]
+    comments = recipe.comments.all().order_by('-created_at')
+    liked = False
+    if request.user.is_authenticated:
+        liked = recipe.like_set.filter(user=request.user).exists()
+
+    context = {
+        'recipe': recipe,
+        'ingredients_list': ingredients_list,
+        'recipe_steps': recipe_steps,
+        'comments': comments,
+        'liked': liked
+    }
+
+    return render(request, 'recipes/recipe_detail.html', context)
+
+@login_required
+def add_recipe(request):
+    if request.method == "POST":
+        form = AddRecipeForm(request.POST, request.FILES)
+        if form.is_valid():
+            recipe = form.save(commit = False)
+            recipe.author = request.user
+            recipe.save()
+            return redirect('profile')
+        else:
+            print(form.errors)
+    else:
+        form = AddRecipeForm()
+    return render(request, 'add_recipe.html', {'form':form})
+
+@login_required
+def add_comment(request, recipe_id):
+    if request.method == 'POST':
+        recipe = get_object_or_404(Recipe, id=recipe_id)
+        text = request.POST.get('text')
+        if text:
+            Comment.objects.create(recipe=recipe, user=request.user, text=text)
+    return redirect('recipes:recipe_detail', recipe_id=recipe_id)
+
+@login_required
+def like_recipe_ajax(request, recipe_id):
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    user = request.user
+
+    like = Like.objects.filter(user=user, recipe=recipe).first()
+    if like:
+        like.delete()
+        liked = False
+    else:
+        Like.objects.create(user=user, recipe=recipe)
+        liked = True
+
+    data = {
+        'liked': liked,
+        'total_likes': recipe.like_set.count()
+    }
+    return JsonResponse(data)
