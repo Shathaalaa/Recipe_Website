@@ -406,7 +406,7 @@ nav a{
 /* container */
 .add-recipe-container {
     width: 600px;
-    margin: 40px auto;
+    margin: 30px auto;
     background: white;
     padding: 30px;
     border-radius: 10px;
@@ -416,7 +416,7 @@ nav a{
 
 .page-title {
     text-align: center;
-    margin: 20px;
+    margin: 30px;
     font-family: "Nunito", sans-serif;
 }
 
