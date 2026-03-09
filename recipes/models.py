@@ -15,8 +15,10 @@ class Recipe(models.Model):
     servings = models.IntegerField()
     ingredients = models.TextField()
     steps = models.TextField()
+
     def total_likes(self):
         return self.like_set.count() 
+    
     @property
     def total_time(self):
         return self.prep_time + self.cook_time
