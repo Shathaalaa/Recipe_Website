@@ -12,7 +12,7 @@ class Recipe(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     prep_time = models.IntegerField()
     cook_time = models.IntegerField()
-    serving = models.IntegerField()
+    servings = models.IntegerField()
     ingredients = models.TextField()
     steps = models.TextField()
     def total_likes(self):

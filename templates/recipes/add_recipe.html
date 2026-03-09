@@ -1,0 +1,64 @@
+{% extends "core/base.html" %}
+{% block title %}Add Recipe{% endblock %}
+{% block body_class %}{% endblock %}
+{%block content%}
+<h1 class="page-title">Add a recipe</h1>
+<div class="add-recipe-container">
+    <form class="recipe-form" method="post" action="{% url 'recipes:add_recipe' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+
+        <div class="single-field">
+            {{ form.title.label_tag }} <br />
+            {{ form.title.errors }}
+            {{ form.title }}
+        </div>
+
+        <div class="single-field">
+            {{ form.description.label_tag }} <br />
+            {{ form.description.errors }}
+            {{ form.description }}
+        </div>
+
+        <div class="fields-row">
+            <div class="field-item">
+                {{ form.prep_time.label_tag }} <br />
+                {{ form.prep_time.errors }}
+                {{ form.prep_time }}
+            </div>
+            <div class="field-item">
+                {{ form.cook_time.label_tag }} <br />
+                {{ form.cook_time.errors }}
+                {{ form.cook_time }}
+            </div>
+            <div class="field-item">
+                {{ form.servings.label_tag }} <br />
+                {{ form.servings.errors }}
+                {{ form.servings }}
+            </div>
+        </div>
+
+        <div class="single-field">
+            {{ form.image.label_tag }} <br />
+            {{ form.image.errors }}
+            {{ form.image }}
+        </div>
+        <div class="field-item">
+            {{ form.ingredients.label_tag }} <br />
+            {{ form.ingredients.errors }}
+            {{ form.ingredients}}
+        </div>
+        <div class="field-item">
+            {{ form.steps.label_tag }} <br />
+            {{ form.steps.errors }}
+            {{ form.steps}}
+        </div>
+
+        <input class="submit-btn" type="submit" name="submit" value="Create Recipe" />
+    </form>
+</div>
+{%endblock%}
+    

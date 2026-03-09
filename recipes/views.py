@@ -57,16 +57,20 @@ def recipe_detail(request, recipe_id):
 def add_recipe(request):
     if request.method == "POST":
         form = AddRecipeForm(request.POST, request.FILES)
+
         if form.is_valid():
-            recipe = form.save(commit = False)
+            recipe = form.save(commit=False)
             recipe.author = request.user
             recipe.save()
-            return redirect('profile')
+            return redirect('recipes:recipe_list')
+
         else:
             print(form.errors)
+
     else:
         form = AddRecipeForm()
-    return render(request, 'add_recipe.html', {'form':form})
+
+    return render(request, 'recipes/add_recipe.html', {'form': form})
 
 @login_required
 def add_comment(request, recipe_id):

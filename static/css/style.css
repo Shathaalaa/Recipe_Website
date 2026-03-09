@@ -401,3 +401,73 @@ nav a{
 #like-count{
     font-size: 16px
 }
+/* add recipe page */
+
+/* container */
+.add-recipe-container {
+    width: 600px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: "Nunito", sans-serif;
+}
+
+.page-title {
+    text-align: center;
+    margin: 20px;
+    font-family: "Nunito", sans-serif;
+}
+
+.add_a_recipe_form input{
+    height:20px;
+    border-radius:5px
+}
+
+.recipe-form input,
+.recipe-form textarea,
+.recipe-form select {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #b7b7b7;
+    border-radius:5px
+}
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border: 2px solid #817b5f;
+}
+
+.recipe-form input[type="file"] {
+    border: none;
+    padding: 0;
+    background: none;
+}
+
+.recipe-form .submit-btn{
+    background: #a59e7d;
+    border: none;
+    color: white;
+    padding:10px
+}
+.recipe-form .submit-btn:hover{
+    background:#817b5f
+}
+.fields-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom:10px
+}
+
+.field-item {
+    flex: 1;
+    min-width: 100px;
+}
+
+.single-field {
+    margin-bottom: 10px;
+}
