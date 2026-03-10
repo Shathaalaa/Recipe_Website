@@ -22,6 +22,10 @@ MEDIA_DIR = os.path.join(BASE_DIR,'media')
 SITE_ID = 2
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'), 
+]
 
 
 # Quick-start development settings - unsuitable for production
@@ -52,7 +56,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'core',
-    'recipes' # delete if doesnt work
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
