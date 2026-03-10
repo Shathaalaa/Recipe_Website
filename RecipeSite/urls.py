@@ -28,3 +28,9 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
+    path('cookDo/', include('core.urls')),
+    path('recipes/', include('recipes.urls')),
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

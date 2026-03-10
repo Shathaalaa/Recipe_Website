@@ -20,6 +20,15 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('picture', models.ImageField(blank=True, upload_to='profile_images')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+            name='Recipe',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(max_length=50, unique=True)),
+                ('description', models.TextField()),
+                ('image', models.CharField(max_length=255)),
+                ('category', models.CharField(max_length=50)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

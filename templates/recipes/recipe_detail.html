@@ -1,0 +1,139 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<div class="recipe-container">
+
+   
+    <h1>{{ recipe.title }}<span class="category-name">  {{ recipe.category }}</span></h1>
+    
+    <div class="recipe-meta">
+        <span><i class="fa-regular fa-circle-user"></i>By {{ recipe.author.username }} {{ recipe.created_at|date:"M d, Y" }}</span>
+        <span><i class="fa-regular fa-comments"></i>{{ recipe.comments.count }} comments</span>
+        <span>
+            <button id="like-btn" class="{% if liked %}liked{% endif %}" data-recipe="{{ recipe.id }}">
+                <span class="heart"><i class="fa-solid fa-heart"></i></span>
+                <span id="like-count">{{ recipe.like_set.count }}</span>
+            </button>
+        </span>
+    </div>
+
+    <div class="recipe-times">
+
+        <div>
+            <strong>Prep Time</strong>
+            <p>{{ recipe.prep_time }} mins</p>
+        </div>
+
+        <div>
+            <strong>Cook Time</strong>
+            <p>{{ recipe.cook_time }} mins</p>
+        </div>
+
+        <div>
+            <strong>Total Time</strong>
+            <p>{{ recipe.total_time }} mins</p>
+        </div>
+
+        <div>
+            <strong>Servings</strong>
+            <p>{{ recipe.servings }}</p>
+        </div>
+
+    </div>
+
+
+    <div class="ingredients">
+        <h3>Ingredients: </h3>
+
+        <ol>
+            {% for ingredient in ingredients_list %}
+                <li>{{ ingredient }}</li>
+            {% endfor %}
+        </ol>
+    </div>
+
+
+    <div class="steps">
+        <h3>Steps: </h3>
+        <ol>
+            {% for step in recipe_steps %}
+                <li>{{ step }}</li>
+            {% endfor %}
+        </ol>
+    </div>
+
+
+    {% if recipe.image %}
+        <div class="recipe-image">
+            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+        </div>
+    {% endif %}
+
+
+    <div class="comments">
+        <h3>Comments</h3>
+
+    
+         <div class="comments-list">
+            {% for comment in comments %}
+                <div class="comment">
+                    <span class="comment-user">{{ comment.user.username }}:</span>
+                    <span class="comment-text">{{ comment.text }}</span>
+                    <span class="comment-time">{{ comment.created_at|date:"M d, Y · H:i" }}</span>
+                </div>
+            {% empty %}
+                <p>No comments yet.</p>
+            {% endfor %}
+        </div>
+
+        <div class="add-comment">
+            {% if user.is_authenticated %}
+                <form method="POST" action="{% url 'recipes:add_comment' recipe.id %}">
+                    {% csrf_token %}
+                    <textarea name="text" rows="1" cols= "100" placeholder="Write your comment..." required></textarea>
+                    <button type="submit">Post Comment</button>
+                </form>
+            {% else %}
+                <p><a href="{% url 'login' %}">Log in</a> to add a comment.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script%}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const likeBtn = document.getElementById('like-btn');
+
+    likeBtn.addEventListener('click', () => {
+        const recipeId = likeBtn.dataset.recipe;
+
+        fetch(`/recipes/${recipeId}/like-ajax/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+                'Accept': 'application/json'
+            },
+        })
+        .then(res => res.json())
+        .then(data => {
+            const count = document.getElementById('like-count');
+            count.textContent = data.total_likes;
+
+            if (data.liked) {
+                likeBtn.classList.add('liked');  // keep it red
+            } else {
+                likeBtn.classList.remove('liked'); // back to empty
+            }
+        })
+        .catch(err => console.error(err));
+    });
+});
+</script>
+{% endblock %}
+
+{% block body_class %}
+{% endblock %}
