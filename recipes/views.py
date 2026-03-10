@@ -5,6 +5,7 @@ from django.urls import reverse
 from recipes.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 # Create your views here.
 
 def signup(request):
@@ -96,11 +97,11 @@ def user_login(request):
                 return redirect(reverse('recipes:index'))
             else:
                 # An inactive account was used - no  loggin in!
-                return HttpResponse("Your Recipe Site Account is disabled")
+                messages.error(request, "you're account is disabled")
         else:
             # Bad login details were provided. So we can't log the user in.
             print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
+            messages.error(request, "*Invalid username or password")
     
     # The request is not a HTTP POST, so display the login form.
     # This scenario would most likely be a HTTP GET.
@@ -108,6 +109,7 @@ def user_login(request):
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
         return render(request,'recipes/login.html')
+    return render(request, 'recipes/login.html')
     
 
 @login_required
