@@ -6,4 +6,4 @@ class RecipesConfig(AppConfig):
     name = "recipes"
 
     def ready(self):
-        import recipes.models
+        import recipes.signals

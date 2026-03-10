@@ -16,5 +16,10 @@
     <input class="login-btn" type="submit" value="LogIn" />
 </form>
     {% load socialaccount %}
-    <a href="{% provider_login_url 'google' next='/' %}">Login with Google</a>
+<form method="post" action="{% provider_login_url 'google' process='login' %}">
+    {% csrf_token %}
+    <button type="submit" class="login-btn" style="background-color: #f48342; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+        Login with Google
+    </button>
+</form>
 {% endblock %}

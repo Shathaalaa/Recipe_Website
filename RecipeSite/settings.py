@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'recipes',
+    'recipes.apps.RecipesConfig',
     'django.contrib.sites',
     'allauth',
     'allauth.account',

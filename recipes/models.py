@@ -11,8 +11,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
 
     # The additional attributes we wish to include.
-    picture = models.ImageField(upload_to='profile_images',blank=True)
-    google_picture_url = models.URLField(blank=True, null=True)
+    picture = models.ImageField(default= 'default.jpg',upload_to='profile_images',blank=True)
 
     def __str__(self):
         return self.user.username
