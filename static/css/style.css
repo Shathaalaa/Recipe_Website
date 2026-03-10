@@ -1,0 +1,108 @@
+.dancing-script-font {
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+.nunito-font {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+.home-icon{
+    font-size:30px;
+    margin:10px;
+    cursor:pointer
+}
+.home-icon a{
+    color: rgb(110, 76, 80);
+}
+h1{
+    margin-bottom:40px
+}
+.signin-signup-container {
+    position: absolute;
+    padding: 35px 45px;
+    background-color: rgb(110, 76, 80);
+    color: white;
+    border-radius: 12px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Nunito", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+.signin-signup-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+.signin-signup-container form p {
+    display: flex;
+    align-items: center;
+    width: 100%
+}
+.signin-signup-container form p label {
+    width: 120px;
+    text-align: left;
+    flex-shrink: 0;
+}
+.signin-signup-container form p input {
+    flex: 1;
+    box-sizing: border-box;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    width: 270px;
+    margin-left: 10px;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="file"] {
+    border: none !important;
+    outline: none;
+}
+.signin-signup-container input:focus {
+    outline: none;
+    border-color: rgb(209, 166, 171);
+    box-shadow: 0 0 4px rgba(209, 166, 171, 0.7);
+}
+.signin-signup-container form .login-btn,
+.signin-signup-container form .signup-btn{
+    padding:10px;
+    width:170px;
+    margin:25px 0 10px 0;
+    font-size:15px;
+    background-color: rgb(209,166,171);
+    border:none;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+    transition: all 0.2s ease;
+}
+
+.signin-signup-container form .login-btn:hover,
+.signin-signup-container form .signup-btn:hover {
+    background-color: rgb(192, 148, 153);
+    transform: translateY(-2px);
+}
+
+.signin-signup-container a{
+    color:rgb(209, 166, 171)
+}
+
+.helptext {
+    display: none;
+}
+
+

@@ -6,27 +6,19 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Sign Up for RecipeSite</h1>
+<h1>Sign Up</h1>
 {% if registered %}
 <strong>Thank you for Signing Up!</strong>
 <a href="{% url 'recipes:index' %}">Return to the homepage.</a><br />
 {% else %}
-<strong>Sign Up here!</strong><br />
-<form id="user_form" method="post" action="{% url 'recipes:signup' %}"
-enctype="multipart/form-data">
-
+<form class="signup-form" id="user_form" method="post" action="{% url 'recipes:signup' %}" enctype="multipart/form-data">
     {% csrf_token %}
-
-    <!-- Display each form -->
-     {{ user_form.as_p }}
-     {{ profile_form.as_p }}
-
-    <!-- Provide a button to click to submit the form. -->
-    <input type="submit" name="submit" value="Sign Up" />
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    <input class = "signup-btn" type="submit" name="submit" value="Sign Up" />
 </form>
     {% load socialaccount %}
-    <h2>Google login</h2>
-    <a href="{% provider_login_url 'google' next='/' %}">Login with Google</a>
+<a href="{% provider_login_url 'google' next='/' %}">sign up with Google</a>
 {% endif %}
 {% endblock %}
 
