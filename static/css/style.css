@@ -22,7 +22,7 @@ body{
     background-color: #f9f7f4 !important
 }
 h1{
-    margin-bottom:40px
+    margin-bottom:30px
 }
 .signin-signup-container {
     position: absolute;
@@ -80,11 +80,11 @@ input[type="file"] {
     border-color: rgb(209, 166, 171);
     box-shadow: 0 0 4px rgba(209, 166, 171, 0.7);
 }
-.signin-signup-container form .login-btn,
-.signin-signup-container form .signup-btn{
+.signup-form .signup-btn,
+#login-form .login-btn{
     padding:10px;
     width:200px;
-    margin:15px 0 10px 0;
+    margin:10px 0 10px 0;
     font-size:15px;
     background-color: rgb(140, 100, 105);
     border:none;
@@ -92,6 +92,7 @@ input[type="file"] {
     color:rgb(215, 212, 189);
     cursor:pointer;
     transition: all 0.2s ease;
+    text-align: center
 }
 
 .signin-signup-container form .login-btn:hover,
@@ -107,6 +108,14 @@ input[type="file"] {
 
 .helptext {
     display: none;
+}
+.error-message{
+    color: rgb(215, 212, 189);
+    text-align: center;
+    width:100%;
+}
+.login-with-google-anchor{
+    color: rgb(215, 212, 189) !important;
 }
 
 

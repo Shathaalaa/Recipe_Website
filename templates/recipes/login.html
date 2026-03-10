@@ -1,25 +1,41 @@
 {% extends 'recipes/base.html' %}
 {% load static %}
-
+{% load socialaccount %}
 {% block title_block %}
     Login
 {% endblock %}
 
 {% block body_block %}
 <h1>Sign In</h1>
+
 <form id="login-form" method="post" action="{% url 'recipes:login' %}">
     {% csrf_token %}
-    <p>Username: <input type="text" name="username" value="" size="50" /></p>
-    <br />
-    <p>Password: <input type="password" name="password" value="" size="50" /></p>
-    <br />
-    <input class="login-btn" type="submit" value="LogIn" />
-</form>
-    {% load socialaccount %}
-<form method="post" action="{% provider_login_url 'google' process='login' %}">
-    {% csrf_token %}
-    <button type="submit" class="login-btn" >
-       <i class="fa-brands fa-google"></i> Login with Google
-    </button>
-</form>
+
+    <p class="form-field">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username">
+    </p>
+
+    <p class="form-field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password">
+    </p>
+
+    {% if messages %}
+        <div class="error-container">
+            {% for message in messages %}
+                <p class="error-message">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <button class="login-btn" type="submit">Log In</button>
+
+    </form>
+
+    <div class="social-login">
+        <a class="login-with-google-anchor" href="{% provider_login_url 'google' %}">
+            <i class="fa-brands fa-google"></i> Login with Google
+        </a>
+    </div>
 {% endblock %}
