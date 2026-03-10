@@ -13,10 +13,13 @@
 .home-icon{
     font-size:30px;
     margin:10px;
-    cursor:pointer
+    cursor:pointer;
 }
 .home-icon a{
-    color: rgb(110, 76, 80);
+    color: rgb(80, 40, 46);
+}
+body{
+    background-color: #f9f7f4 !important
 }
 h1{
     margin-bottom:40px
@@ -24,8 +27,8 @@ h1{
 .signin-signup-container {
     position: absolute;
     padding: 35px 45px;
-    background-color: rgb(110, 76, 80);
-    color: white;
+    background-color: rgb(80, 40, 46);
+    color: rgb(215, 212, 189);
     border-radius: 12px;
     top: 50%;
     left: 50%;
@@ -81,24 +84,25 @@ input[type="file"] {
 .signin-signup-container form .signup-btn{
     padding:10px;
     width:170px;
-    margin:25px 0 10px 0;
+    margin:15px 0 10px 0;
     font-size:15px;
-    background-color: rgb(209,166,171);
+    background-color: rgb(140, 100, 105);
     border:none;
     border-radius:6px;
-    color:white;
+    color:rgb(215, 212, 189);
     cursor:pointer;
     transition: all 0.2s ease;
 }
 
 .signin-signup-container form .login-btn:hover,
 .signin-signup-container form .signup-btn:hover {
-    background-color: rgb(192, 148, 153);
+    background-color: rgb(121, 74, 79);
     transform: translateY(-2px);
 }
 
 .signin-signup-container a{
-    color:rgb(209, 166, 171)
+    color:rgb(140, 100, 105);
+    font-size:12px
 }
 
 .helptext {
