@@ -123,14 +123,6 @@ def user_logout(request):
     # Take the user back to the homepage.
     return redirect(reverse('recipes:index'))
     
-
-
-
-
-
-
-
-
 def recipe_list(request, category=None):
     if category:
         recipes = Recipe.objects.filter(category__iexact=category)

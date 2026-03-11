@@ -14,8 +14,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     </head>
-    <body>
-        <div class="home-icon"><a href="#"><i class="fa-regular fa-house"></i></a></div>
+    <body class="sign-body">
+        <div class="home-icon"><a href="{% url 'index' %}"><i class="fa-regular fa-house"></i></a></div>
         <div class="signin-signup-container">
             {% block body_block %}
             {% endblock %}
