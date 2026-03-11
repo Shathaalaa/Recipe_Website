@@ -5,5 +5,6 @@ app_name = 'recipes'
 
 urlpatterns = [
     path('signup/',views.signup,name="signup"),
-    path('login/',views.user_login,name="login")   
+    path('login/',views.user_login,name="login") ,
+    path('profile/<username>',views.ProfileView.as_view(),name="profile") 
 ]

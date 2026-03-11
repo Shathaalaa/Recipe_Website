@@ -4,7 +4,11 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.urls import reverse
 from recipes.forms import UserForm, UserProfileForm
+from django.contrib.auth.models import User
+from recipes.models import UserProfile
 from django.contrib.auth import authenticate, login, logout
+from django.utils.decorators import method_decorator
+from django.views import View
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -119,6 +123,50 @@ def user_logout(request):
     logout(request)
     # Take the user back to the homepage.
     return redirect(reverse('recipes:index'))
+
+
+class ProfileView(View):
+    def get_user_details(self, username):
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return None
+        
+        user_profile = UserProfile.objects.get_or_create(user=user)[0]
+        form = UserProfileForm({'website':user_profile.website,
+                                'picture':user_profile.picture})
+        return (user,user_profile,form)
+    
+    @method_decorator(login_required)
+    def get(self,request,username):
+        try:
+            (user,user_profile,form) = self.get_user_details(username)
+        except TypeError:
+            return redirect(reverse('recipes:index'))
+        context_dict = {'user_profile':user_profile,
+                        'selected_user':user,
+                        'form':form}
+        return render(request,'recipes/profile.html',context_dict)
+    
+    @method_decorator(login_required)
+    def post(self, request, username):
+        try:
+            (user,user_profile,form) = self.get_user_details(username)
+        except TypeError:
+            return redirect(reverse('recipes:index'))
+        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('recipes:profile',user.username)
+        else:
+            print(form.errors)
+
+        context_dict = {'user_profile':user_profile,
+                        'selected_user':user,
+                        'form':form}
+        
+        return render(request, 'recipes/profile.html',context_dict)
     
 
 
