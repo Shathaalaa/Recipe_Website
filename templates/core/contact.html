@@ -2,9 +2,9 @@
 {% load static %}
 
 {% block title %}Contact Us | Recipe Website{% endblock %}
-
+{% block body_class %}{% endblock %}
 {% block content %}
-    <section class="hero">
+    <section class="contact">
         <h1>CONTACT US</h1>
         <p>We'd love to hear from you!</p>
         <p>If you have any questions, suggestions, or feedback about our recipes or website, please fill out the form below. Enter your name, email addres, and your message, and we'll get back to you as soon as possible.</p>
@@ -18,7 +18,7 @@
                 {{ field.help_text }}
                 {{ field }}
             {% endfor %}
-            <input type="submit" name="submit" value="Send us a message" />
+            <input type="submit" name="submit" value="Send" />
         </form>
     </section>
 {% endblock %}

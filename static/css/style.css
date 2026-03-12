@@ -1,8 +1,9 @@
 *{
-    padding:0;
+    padding: 0;
     margin: 0;
     box-sizing: border-box
 }
+
 .dancing-script-font {
     font-family: "Dancing Script", cursive;
     font-optical-sizing: auto;
@@ -17,87 +18,214 @@
     font-style: normal;
 }
 
-body{
-    background-image: url(../images/homepage_background.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
+.home-icon {
+    font-size: 30px;
+    margin: 10px;
+    cursor: pointer;
 }
 
-body::before {
+.home-icon a {
+    color: rgb(80, 40, 46);
+}
+
+body {
+    background-color: #f9f7f4 !important
+}
+
+h1 {
+    margin-bottom: 40px
+}
+
+.signin-signup-container {
+    position: absolute;
+    padding: 35px 45px;
+    background-color: rgb(80, 40, 46);
+    color: rgb(215, 212, 189);
+    border-radius: 12px;
+}
+
+body {
+    background-color: #f9f7f4 !important
+}
+
+body.homepage{
+    background: url(../images/background-img.jpg);
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
+body.homepage::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(28, 36, 31, 0.5);
     z-index: -1;
 }
 
-nav{
+nav {
     display: flex;
     justify-content: space-between;
-    align-items:center;
-    color: white;
-    padding: 20px;
-    background-color:rgb(165, 153, 123)
+    align-items: center;
+    padding: 25px;
+    background: rgb(80, 40, 46);
+    border-bottom: rgb(215, 212, 189) solid 1px
 }
-nav .logo{
+
+nav .logo {
     font-family: Dancing Script;
-    color: black;
+    color: rgb(215, 212, 189);
     font-size: 24px;
     display: flex;
     align-items: center;
 }
 
-nav .logo img{
-    width:50px;
-    margin-right:10px
+nav .logo img {
+    width: 50px;
+    margin-right: 10px
 }
 
-nav ul{
+nav ul {
     display: flex;
     list-style: none;
 }
 
-nav ul li{
+nav ul li {
     margin: 0 15px;
     cursor: pointer;
     position: relative;
+
 }
-nav ul li::before{
+
+nav ul li::before {
     content: "";
     position: absolute;
     top: 100%;
     left: 0;
     width: 0;
     height: 1px;
-    background-color: black;
+    background-color: rgb(215, 212, 189);
     z-index: 2;
-    transition:1s
+    transition: 1s
 }
+
 nav ul li:hover::before {
     width: 100%;
 }
-nav a{
+
+nav a {
     text-decoration: none;
-    text-transform:uppercase;
-    color:black;
+    text-transform: uppercase;
     font-family: Nunito;
+    color: rgb(215, 212, 189)
 }
 
-.hero{
-    position:absolute;
-    top:50%;
-    left:50%;
+.hero {
+    position: absolute;
+    top: 55%;
+    left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: rgb(183, 175, 146);
+    color: rgb(215, 212, 189);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
     font-family: Nunito;
-    width:70%
+    width: 70%
 }
-.hero h2{
-    font-size:48px;
-    margin-bottom:10px;
-    text-transform:uppercase
+
+.hero h2 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    text-transform: uppercase
+}
+
+/* about page */
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding: 60px 10%;
+    font-family: "Nunito", sans-serif;
+}
+
+.about img {
+    width: 400px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.about-text {
+    max-width: 500px;
+}
+
+.about-text h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+
+/* contact page */
+.contact {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 10px;
+    font-family: "Nunito", sans-serif;
+    text-align: center;
+}
+
+.contact h1 {
+    margin-bottom: 10px;
+}
+
+.contact p {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+#contact_form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#contact_form input,
+#contact_form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+#contact_form textarea{
+    height: 150px
+}
+
+#contact_form input:focus,
+#contact_form textarea:focus {
+    outline: none;
+    border-color: rgb(209, 166, 171);
+    box-shadow: 0 0 4px rgba(209, 166, 171, 0.7);
+}
+
+#contact_form input[type="submit"] {
+    background-color: rgb(140, 100, 105);
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-top:20px
+}
+
+#contact_form input[type="submit"]:hover {
+    background-color: rgb(121, 74, 79);
+    transform: translateY(-2px);
 }
