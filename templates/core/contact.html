@@ -1,0 +1,24 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Contact Us | Recipe Website{% endblock %}
+{% block body_class %}{% endblock %}
+{% block content %}
+    <section class="contact">
+        <h1>CONTACT US</h1>
+        <p>We'd love to hear from you!</p>
+        <p>If you have any questions, suggestions, or feedback about our recipes or website, please fill out the form below. Enter your name, email addres, and your message, and we'll get back to you as soon as possible.</p>
+        <form id="contact_form" method="post">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+            <input type="submit" name="submit" value="Send!" />
+        </form>
+    </section>
+{% endblock %}

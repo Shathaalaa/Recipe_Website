@@ -1,4 +1,4 @@
-* {
+*{
     padding: 0;
     margin: 0;
     box-sizing: border-box
@@ -41,14 +41,15 @@ h1 {
     padding: 35px 45px;
     background-color: rgb(80, 40, 46);
     color: rgb(215, 212, 189);
-    border-radius: 12px;}
+    border-radius: 12px;
+}
 
 body {
     background-color: #f9f7f4 !important
 }
 
-body.homepage {
-    background-image: url(../image/background-img.jpg) !important;
+body.homepage{
+    background: url(../images/background-img.jpg);
     background-size: cover !important;
     background-repeat: no-repeat !important;
 }
@@ -652,7 +653,77 @@ input[type="file"] {
     outline: none;
 }
 
-.signin-signup-container input:focus {
+/* about page */
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding: 60px 10%;
+    font-family: "Nunito", sans-serif;
+}
+
+.about img {
+    width: 400px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.about-text {
+    max-width: 500px;
+}
+
+.about-text h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+
+/* contact page */
+.contact {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 10px;
+    font-family: "Nunito", sans-serif;
+    text-align: center;
+}
+
+.contact h1 {
+    margin-bottom: 10px;
+}
+
+.contact p {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+#contact_form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#contact_form input,
+#contact_form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+#contact_form textarea{
+    height: 150px
+}
+
+#contact_form input:focus,
+#contact_form textarea:focus {
     outline: none;
     border-color: rgb(209, 166, 171);
     box-shadow: 0 0 4px rgba(209, 166, 171, 0.7);
@@ -692,4 +763,18 @@ input[type="file"] {
 .have-account, .create-account{
     color: rgb(215, 212, 189);
     font-size:12px
+}
+
+#contact_form input[type="submit"] {
+    background-color: rgb(140, 100, 105);
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-top:20px
+}
+
+#contact_form input[type="submit"]:hover {
+    background-color: rgb(121, 74, 79);
+    transform: translateY(-2px);
 }

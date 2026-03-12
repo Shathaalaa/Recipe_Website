@@ -20,8 +20,8 @@
         <ul>
             <li><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'recipes:recipe_list' %}">Recipes</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="{% url 'about'%}">About</a></li>
+            <li><a href="{% url 'contact'%}">Contact</a></li>
             <li><a href="{% url 'recipes:login' %}">Sign In</a></li> 
             <!-- to be edited when all pages are ready! -->
         </ul>
