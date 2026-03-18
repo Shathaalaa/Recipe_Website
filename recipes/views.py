@@ -5,71 +5,53 @@ from django.urls import reverse
 from recipes.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
+from django.contrib import messages#
+from django.contrib.auth.models import User
+from recipes.models import UserProfile
+from django.views import View
+from django.utils.decorators import method_decorator
 
 from .forms import AddRecipeForm #delete maybe
 from .models import Recipe, Comment, Like
 from django.http import JsonResponse
 # Create your views here.
 
+
 def signup(request):
-    # A boolean value for telling the template
-    # whether the registeration was successful.
-    # Set to False initially. Code changes value to
-    # True when registration succeeds.
     registered = False
 
-    # # If it's a HTTP POST, we're interested in processing form data.
     if request.method == 'POST':
-        # Attempt to grab information from the raw form information.
-        # Note that we make use of both UserForm and UserProfileForm.
         user_form = UserForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
+        profile_form = UserProfileForm(request.POST, request.FILES)
 
         if user_form.is_valid() and profile_form.is_valid():
-            # Save the user's form data to the database.
             user = user_form.save()
-
-            #Now we hash the password with the set_password
-            #Once hashed, we can update the user object.
             user.set_password(user.password)
             user.save()
 
-            # Now sort out the UserProfile instance.
-            # Since ewe need to set the user attribute ourselves,
-            # we set commit=False. This delays saving the model
-            # until we're ready to avoid integrity problems
-            profile = profile_form.save(commit=False)
-            profile.user = user
+            profile, created = UserProfile.objects.get_or_create(user=user)
 
-            # Did the user provide a profile picture?
-            # If so, we need to get it from the input form and
-            # put it in the UserProfile model.
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
+            # bind submitted data to the existing profile
+            profile_form = UserProfileForm(
+                request.POST,
+                request.FILES,
+                instance=profile
+            )
+            profile_form.save()
 
-            # Now we save the UserProfile model instance
-            profile.save()
-
-            #Update our variable to indicate that the template
-            #registration was successful.
             registered = True
-
         else:
-            # Invalid form or forms - mistakes or something else?
-            # print problems to the terminal.
-            print(user_form.errors,profile_form.errors)
+            print(user_form.errors, profile_form.errors)
 
     else:
-        # Not a HTTP POST, so we render our form using two ModelForm instances.
-        # These forms will be blank, ready for user input
         user_form = UserForm()
         profile_form = UserProfileForm()
-    
-    # Render the template depending on the context.
-    return render(request, 'recipes/signup.html',context={'user_form':user_form, 
-    'profile_form':profile_form,
-    'registered':registered})
+
+    return render(request, 'recipes/signup.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'registered': registered
+    })
 
 
 def user_login(request):
@@ -98,7 +80,7 @@ def user_login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage/
                 login(request,user)
-                return redirect(reverse('recipes:index'))
+                return redirect(reverse('recipes:profile_default'))
             else:
                 # An inactive account was used - no  loggin in!
                 messages.error(request, "you're account is disabled")
@@ -121,7 +103,7 @@ def user_logout(request):
     # Since we know the user is logged in, we can now just log them out.
     logout(request)
     # Take the user back to the homepage.
-    return redirect(reverse('recipes:index'))
+    return redirect(reverse('core:index'))
     
 def recipe_list(request, category=None):
     if category:
@@ -212,3 +194,18 @@ def like_recipe_ajax(request, recipe_id):
         'total_likes': recipe.like_set.count()
     }
     return JsonResponse(data)
+
+
+ 
+@login_required
+def profile(request, section):
+    user_profile = UserProfile.objects.get(user=request.user)
+    if section == "liked":
+        recipes = Recipe.objects.filter(like__user=request.user)
+    else:
+        recipes = Recipe.objects.filter(author=request.user)
+
+    
+    return render(request,'recipes/profile.html',{'user_profile':user_profile,
+                                                  'recipes':recipes,
+                                                  'selected_section':section})

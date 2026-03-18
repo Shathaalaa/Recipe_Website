@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body class="{% block body_class %}homepage{% endblock %}">
@@ -18,11 +19,30 @@
         </div>
 
         <ul>
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'recipes:recipe_list' %}">Recipes</a></li>
-            <li><a href="{% url 'about'%}">About</a></li>
-            <li><a href="{% url 'contact'%}">Contact</a></li>
-            <li><a href="{% url 'recipes:login' %}">Sign In</a></li> 
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'core:index' %}">Home</a></li>
+                <li><a href="{% url 'recipes:recipe_list' %}">Recipes</a></li>
+                <li><a href="{% url 'core:about'%}">About</a></li>
+                <li><a href="{% url 'core:contact'%}">Contact</a></li>
+                <li class="user-menu">
+                    <a href="#"><i class='fas fa-user-alt' style='font-size:28px'></i><a class="user-menu-btn"><i class="fa-solid fa-chevron-down"></i></a></a>
+                    <div class="dropdown-menu">
+                        <h2>Welcome {{ request.user.username}}!</h2>
+                        <a href="{% url 'recipes:profile' 'my' %}">My Recipes</a>
+                        <a href="{% url 'recipes:profile' 'liked' %}">Liked Recipes</a>
+                        <form action="{% url 'recipes:logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">LOGOUT</button>
+                        </form>
+                    </div>
+                </li>
+            {% else %}
+                <li><a href="{% url 'core:index' %}">Home</a></li>
+                <li><a href="{% url 'recipes:recipe_list' %}">Recipes</a></li>
+                <li><a href="{% url 'core:about'%}">About</a></li>
+                <li><a href="{% url 'core:contact'%}">Contact</a></li>
+                <li><a href="{% url 'recipes:login' %}">Sign In</a></li> 
+            {% endif %}
             <!-- to be edited when all pages are ready! -->
         </ul>
     </nav>
@@ -32,7 +52,25 @@
         {% endblock %}
     </main>
 
-    {% block script %}{% endblock %}
+    {% block script %}
+    <script>
+        const userMenuBtn = document.querySelector('.user-menu-btn');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+
+        if(userMenuBtn && dropdownMenu){
+            userMenuBtn.addEventListener('click',function(){
+                dropdownMenu.style.display = 
+                    dropdownMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click',function(event){
+                if(!event.target.closest('.user-menu')){
+                    dropdownMenu.style.display = 'none'
+                }
+            });
+        }
+    </script>
+    {% endblock %}
 
 </body>
 </html>
