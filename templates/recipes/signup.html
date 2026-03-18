@@ -9,7 +9,7 @@
 <h1>Sign Up</h1>
 {% if registered %}
 <strong>Thank you for Signing Up!</strong>
-<a href="{% url 'recipes:index' %}">Return to the homepage.</a><br />
+<a href="{% url 'core:index' %}">Return to the homepage.</a><br />
 {% else %}
 <form class="signup-form" id="user_form" method="post" action="{% url 'recipes:signup' %}" enctype="multipart/form-data">
     {% csrf_token %}

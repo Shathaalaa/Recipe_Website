@@ -60,7 +60,7 @@ body.homepage::before {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 120%;
     background-color: rgba(28, 36, 31, 0.5);
     z-index: -1;
 }
@@ -240,7 +240,7 @@ nav a {
 
 #no-results {
     position: absolute;
-    top: 50%;
+    top: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: "Nunito", sans-serif;
@@ -297,7 +297,6 @@ nav a {
 }
 
 .recipe-meta {
-    margin-top: 10px;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -308,11 +307,14 @@ nav a {
     margin-right: 3px;
     font-size: 16px
 }
+.description p{
+    padding:20px !important
+}
 
 .recipe-times {
     display: flex;
     justify-content: space-evenly;
-    margin: 50px 0;
+    margin: 30px 0;
     background-color: white;
     border: #ccc 1px solid;
     border-radius: 10px
@@ -321,7 +323,7 @@ nav a {
 .recipe-times>div {
     flex: 1;
     text-align: center;
-    padding: 50px 0;
+    padding: 30px 0;
 }
 
 .recipe-times>div:not(:last-child) {
@@ -597,7 +599,7 @@ h1 {
 
 .signin-signup-container {
     position: absolute;
-    padding: 35px 45px;
+    padding: 35px 35px;
     background-color: rgb(80, 40, 46);
     color: rgb(215, 212, 189);
     border-radius: 12px;
@@ -777,4 +779,230 @@ input[type="file"] {
 #contact_form input[type="submit"]:hover {
     background-color: rgb(121, 74, 79);
     transform: translateY(-2px);
+}
+
+
+/* Profile Page */
+
+
+.profile{
+    display: flex;
+    align-items: center;
+    padding-right:120px;
+}
+
+.profile-img img {
+    border-radius: 75%;
+    border: 3px solid #ccc;
+    margin-right: 30px;   
+    width: 150px; 
+    height: 150px;
+   
+}
+
+
+.category-my {
+    padding: 6px 14px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-family: "Nunito", sans-serif;
+}
+
+.category-my.active {
+    background: rgb(215, 212, 189);
+    color: white;
+}
+
+.category-my:hover {
+    background: rgb(215, 212, 189);
+    color: white;
+    transition: 0.4s
+}
+
+.category-profile {
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-family: "Nunito", sans-serif;
+}
+
+.category-profile.active {
+    background: rgb(215, 212, 189);
+    color: white;
+}
+
+.category-profile:hover {
+    background: rgb(215, 212, 189);
+    color: white;
+    transition: 0.4s
+}
+
+.profile-container {
+    max-width:600px;
+    width: 85%;
+    margin: 30px auto;  
+    padding: 20px;
+    background-color: rgb(80, 40, 46);
+    color: rgb(215, 212, 189);
+    border-radius: 12px;
+    font-family: "Nunito", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+}
+
+
+
+
+.recipes-grid-profile {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 70%;
+    margin: 30px;
+}
+
+
+.recipe-card-profile {
+    display: flex;
+    flex-direction: column;
+    height: 95%;
+    padding: 15px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    font-family: "Nunito", sans-serif;
+
+}
+
+.recipe-card-profile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+}
+
+.recipe-card-profile img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+#no-results-profile {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Nunito", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size:25px;
+    color:rgb(215, 212, 189);
+}
+
+.recipe-user-profile {
+    font-size: 12px;
+    padding: 6px;
+    border-bottom: 1px solid #eee;
+    color:black;
+}
+
+.recipe-info-profile {
+    padding: 10px;
+    font-size: 14px;
+    color:black;
+}
+
+.view-btn-profile {
+    display: flex;
+    align-items: end;
+    padding: 6px 0;
+    color: black;
+    font-size: 14px;
+    margin-top: auto;
+    text-decoration: none;
+}
+
+.view-more-profile {
+    text-decoration: underline;
+    transition: 0.3s
+}
+
+.view-btn-profile i {
+    padding-left: 7px;
+}
+
+.view-btn-profile:hover .view-more-profile {
+    transform: scale(1.08);
+}
+
+.top-list-profile{
+    margin-top:10px;
+}
+
+.categories-profile{
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.user-menu{
+    position:relative;
+    list-style:none
+}
+
+.user-menu h2{
+    color:black;
+    font-family: Nunito;
+    text-align:center;
+    margin-top:10px;
+}
+
+.dropdown-menu{
+    display:none;
+    position:absolute;
+    top:120%;
+    right:0;
+    background:rgb(215, 212, 189);
+    min-width:220px;
+    border-radius:10px;
+    box-shadow:8px 12px 20px rgba(0,0,0,0.15);
+    overflow:hidden;
+    z-index:1000;
+}
+
+.dropdown-menu a,
+.dropdown-menu button{
+    display:block;
+    width:100%;
+    padding:16px 18px;
+    text-align:left;
+    text-decoration:none;
+    color:black; 
+    background:rgb(215, 212, 189);
+    border:none;
+    font-weight:bold;
+    font-family: Nunito;
+    cursor:pointer;
+    font-size:16px;
+    text-align:center;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover{
+    background:rgb(255, 252, 233);
+    font-size:18px;
+    border-bottom: black solid 1px;
+    transition:0.5s;
+
 }

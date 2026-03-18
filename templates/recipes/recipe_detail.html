@@ -18,8 +18,13 @@
         </span>
     </div>
 
-    <div class="recipe-times">
+    <div class="description">
+        <p>
+            {{recipe.description}}
+        </p>
+    </div>
 
+    <div class="recipe-times">
         <div>
             <strong>Prep Time</strong>
             <p>{{ recipe.prep_time }} mins</p>
@@ -42,6 +47,7 @@
 
     </div>
 
+     
 
     <div class="ingredients">
         <h3>Ingredients: </h3>
@@ -131,7 +137,23 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(err => console.error(err));
     });
-});
+
+    const userMenuBtn = document.querySelector('.user-menu-btn');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    if(userMenuBtn && dropdownMenu){
+        userMenuBtn.addEventListener('click',function(){
+            dropdownMenu.style.display = 
+                dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.addEventListener('click',function(event){
+            if(!event.target.closest('.user-menu')){
+                dropdownMenu.style.display = 'none'
+            }
+        });
+    }
+}); 
 </script>
 {% endblock %}
 
