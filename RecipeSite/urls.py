@@ -20,6 +20,7 @@ from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
 from recipes import views
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('recipes/',include('recipes.urls')),
@@ -27,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path('cookDo/', include('core.urls')),
+    path('', RedirectView.as_view(url='/cookDo/')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 if settings.DEBUG:
