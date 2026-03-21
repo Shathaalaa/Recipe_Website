@@ -5,6 +5,8 @@
 Profile
 {% endblock %}
 
+{% block body_class %}profile-page{% endblock %}
+
 {% block content %}
 <div class="profile-container">
     <div class="profile">
@@ -17,13 +19,8 @@ Profile
         {% endif %}
 
         <div class="profile-info">
-            <h1>{{ request.user.username }}'s Profile</h1>
-            <p><strong>Username:</strong> {{ request.user.username }}</p>
-            <p><strong>Email:</strong> {{ request.user.email }}</p>
-
-            {% if user_profile.website %}
-                <p><strong>Website:</strong> <a href="{{ user_profile.website }}">{{ user_profile.website }}</a></p>
-            {% endif %}
+            <h1>Welcome, {{ request.user.username }}</h1>
+            <p id="user-email-profile">Email: {{ request.user.email }}</p>
         </div>
     </div>
 
@@ -31,6 +28,7 @@ Profile
         <div class="categories-profile">
             <a class="category-profile {% if selected_section == 'my' %}active{% endif %}" href="{% url 'recipes:profile' 'my' %}">My Recipes</a>
             <a class="category-profile {% if selected_section == 'liked' %}active{% endif %}" href="{% url 'recipes:profile' 'liked' %}">Liked Recipes</a>
+            <a class="category-profile" href="{% url 'recipes:add_recipe' %}"><i class="fa-solid fa-plus"></i>create recipe</a>
         </div>
     </div>
 </div>

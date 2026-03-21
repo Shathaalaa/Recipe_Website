@@ -25,9 +25,11 @@
                 <li><a href="{% url 'core:about'%}">About</a></li>
                 <li><a href="{% url 'core:contact'%}">Contact</a></li>
                 <li class="user-menu">
-                    <a href="#"><i class='fas fa-user-alt' style='font-size:28px'></i><a class="user-menu-btn"><i class="fa-solid fa-chevron-down"></i></a></a>
+                    <div class="user-menu-btn">
+                        <i class='fas fa-user-alt' style='font-size:28px'></i>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
                     <div class="dropdown-menu">
-                        <h2>Welcome {{ request.user.username}}!</h2>
                         <a href="{% url 'recipes:profile' 'my' %}">My Recipes</a>
                         <a href="{% url 'recipes:profile' 'liked' %}">Liked Recipes</a>
                         <form action="{% url 'recipes:logout' %}" method="post">
@@ -43,7 +45,6 @@
                 <li><a href="{% url 'core:contact'%}">Contact</a></li>
                 <li><a href="{% url 'recipes:login' %}">Sign In</a></li> 
             {% endif %}
-            <!-- to be edited when all pages are ready! -->
         </ul>
     </nav>
 
