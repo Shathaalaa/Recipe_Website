@@ -5,7 +5,7 @@ app_name = 'recipes'
 
 urlpatterns = [
     path('signup/',views.signup,name="signup"),
-    path('login/',views.user_login,name="login"),
+    path('login/',views.user_login,name="user_login"),
     path('', views.recipe_list, name='recipe_list'),
     path('<int:recipe_id>/', views.recipe_detail, name='recipe_detail'),
     path('category/<str:category>/', views.recipe_list, name='recipe_by_category'),

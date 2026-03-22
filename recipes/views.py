@@ -176,12 +176,16 @@ def add_comment(request, recipe_id):
             Comment.objects.create(recipe=recipe, user=request.user, text=text)
     return redirect('recipes:recipe_detail', recipe_id=recipe_id)
 
-@login_required
+
 def like_recipe_ajax(request, recipe_id):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'login required'}, status=401)
+
     recipe = get_object_or_404(Recipe, id=recipe_id)
     user = request.user
 
     like = Like.objects.filter(user=user, recipe=recipe).first()
+
     if like:
         like.delete()
         liked = False
@@ -189,12 +193,10 @@ def like_recipe_ajax(request, recipe_id):
         Like.objects.create(user=user, recipe=recipe)
         liked = True
 
-    data = {
+    return JsonResponse({
         'liked': liked,
         'total_likes': recipe.like_set.count()
-    }
-    return JsonResponse(data)
-
+    })
 
  
 @login_required

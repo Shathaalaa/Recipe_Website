@@ -12,6 +12,7 @@
         <span><i class="fa-regular fa-comments"></i>{{ recipe.comments.count }} comments</span>
         <span>
             <button id="like-btn" class="{% if liked %}liked{% endif %}" data-recipe="{{ recipe.id }}">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                 <span class="heart"><i class="fa-solid fa-heart"></i></span>
                 <span id="like-count">{{ recipe.like_set.count }}</span>
             </button>
@@ -101,7 +102,7 @@
                     <button type="submit">Post Comment</button>
                 </form>
             {% else %}
-                <p><a href="{% url 'login' %}">Log in</a> to add a comment.</p>
+                <p><a href="{% url 'recipes:user_login' %}" style="color: #000000; ">Log in</a> to add a comment.</p>
             {% endif %}
         </div>
     </div>
@@ -113,26 +114,37 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const likeBtn = document.getElementById('like-btn');
+    if (!likeBtn) return;
 
     likeBtn.addEventListener('click', () => {
         const recipeId = likeBtn.dataset.recipe;
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
         fetch(`/recipes/${recipeId}/like-ajax/`, {
             method: 'POST',
             headers: {
-                'X-CSRFToken': '{{ csrf_token }}',
+                'X-CSRFToken': csrftoken,
                 'Accept': 'application/json'
             },
+            credentials: 'same-origin'
         })
-        .then(res => res.json())
+        .then(res => {
+            if (res.status === 401) {
+                window.location.href = "{% url 'recipes:user_login' %}";
+                return;
+            }
+            return res.json();
+        })
         .then(data => {
+            if (!data) return;
+
             const count = document.getElementById('like-count');
             count.textContent = data.total_likes;
 
             if (data.liked) {
-                likeBtn.classList.add('liked');  // keep it red
+                likeBtn.classList.add('liked');
             } else {
-                likeBtn.classList.remove('liked'); // back to empty
+                likeBtn.classList.remove('liked');
             }
         })
         .catch(err => console.error(err));
@@ -141,19 +153,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const userMenuBtn = document.querySelector('.user-menu-btn');
     const dropdownMenu = document.querySelector('.dropdown-menu');
 
-    if(userMenuBtn && dropdownMenu){
-        userMenuBtn.addEventListener('click',function(){
-            dropdownMenu.style.display = 
+    if (userMenuBtn && dropdownMenu) {
+        userMenuBtn.addEventListener('click', function () {
+            dropdownMenu.style.display =
                 dropdownMenu.style.display === 'block' ? 'none' : 'block';
         });
 
-        document.addEventListener('click',function(event){
-            if(!event.target.closest('.user-menu')){
-                dropdownMenu.style.display = 'none'
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('.user-menu')) {
+                dropdownMenu.style.display = 'none';
             }
         });
     }
-}); 
+});
 </script>
 {% endblock %}
 
