@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from recipes import views
 from django.views.generic import RedirectView
 
+
 urlpatterns = [
     path('recipes/',include('recipes.urls')),
     # The above maps any URLs starting with recipes/ to be handled by rango.
