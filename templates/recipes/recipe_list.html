@@ -1,0 +1,105 @@
+{% extends 'core/base.html' %}
+{% block body_class %}{% endblock %}
+{% block content %}
+
+
+<div class="top-list">
+    <div class="categories">
+    <a href="{% url 'recipes:recipe_list' %}" 
+       class="category {% if not selected_category %}active{% endif %}">All</a>
+
+    {% for category in categories %}
+        <a href="{% url 'recipes:recipe_by_category' category %}" 
+           class="category {% if selected_category == category %}active{% endif %}">
+            {{ category }}
+        </a>
+    {% endfor %}
+    </div>  
+
+    <div class="search-box"> 
+        <input type="text" id="search-input" placeholder="Search recipes...">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+</div>
+
+<div class="recipes-grid">
+
+{% for recipe in recipes %}
+<div class="recipe-card" data-name="{{ recipe.title|lower }}">
+    <div class="recipe-user">
+        <i class="fa-regular fa-user"></i>
+        {{ recipe.author.username }}
+    </div>
+
+    <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+
+    <div class="recipe-info">
+        <p><strong>Dish:</strong> {{ recipe.title }}</p>
+        <p><strong>Category:</strong> {{ recipe.category }}</p>
+        <p><strong>Description:</strong> {{ recipe.description|truncatewords:12 }}</p>
+        <a href="{% url 'recipes:recipe_detail' recipe.id %}" class="view-btn">
+            <span class="view-more">view more</span>
+            <i class="fa-solid fa-arrow-right-long"></i>
+        </a>
+    </div>
+</div>
+{% endfor %}
+
+{% if recipes|length == 0 %}
+<p id="no-results">
+    No results found.
+</p>
+{% endif %}
+</div>
+
+<p id="no-results" style="display:none">No results found.</p>
+
+
+{% endblock %}
+
+{% block script %}
+<script>    
+const searchInput = document.getElementById('search-input');
+const recipes = document.querySelectorAll('.recipe-card');
+const noResults = document.getElementById('no-results');
+
+const userMenuBtn = document.querySelector('.user-menu-btn');
+const dropdownMenu = document.querySelector('.dropdown-menu');
+
+if(userMenuBtn && dropdownMenu){
+    userMenuBtn.addEventListener('click',function(){
+        dropdownMenu.style.display = 
+            dropdownMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.addEventListener('click',function(event){
+        if(!event.target.closest('.user-menu')){
+            dropdownMenu.style.display = 'none'
+        }
+    });
+}
+
+searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase().trim();
+    let anyVisible = false; 
+
+    recipes.forEach(recipe => {
+        const name = recipe.dataset.name; 
+        const words = name.split(' '); 
+        const match = words.some(word => word.startsWith(query));
+
+        if (match || query === '') {
+            recipe.style.display = '';
+            anyVisible = true;
+        } else {
+            recipe.style.display = 'none';
+        }
+    });
+
+    noResults.style.display = anyVisible ? 'none' : 'block';
+});
+
+
+</script>
+{% endblock %}
+

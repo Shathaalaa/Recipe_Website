@@ -1,0 +1,33 @@
+{% extends 'recipes/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Sign Up
+{% endblock %}
+
+{% block body_block %}
+<h1>Sign Up</h1>
+{% if registered %}
+<strong>Thank you for Signing Up!</strong>
+<a href="{% url 'core:index' %}">Return to the homepage.</a><br />
+{% else %}
+<form class="signup-form" id="user_form" method="post" action="{% url 'recipes:signup' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    <input class = "signup-btn" type="submit" name="submit" value="Sign Up" />
+</form>
+
+    {% load socialaccount %}
+
+<form method="post" action="{% provider_login_url 'google' process='login' %}">
+    {% csrf_token %}
+    <button type="submit" class="login-btn">
+       <i class="fa-brands fa-google"></i> Signup with Google
+    </button>
+</form>
+<a class="have-account" href="{% url 'recipes:user_login'%}">Already have an account?</a>
+{% endif %}
+{% endblock %}
+
+

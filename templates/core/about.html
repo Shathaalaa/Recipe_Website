@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}About Us | Recipe Website{% endblock %}
+{% block body_class %}{% endblock %}
+{% block content %}
+<section class="about">
+    <img src="{% static 'images/about.jpg' %}" alt="About us image">
+    <div class="about-text">
+        <h1>ABOUT US</h1>
+        <p>Our website is a community for people who love cooking and sharing food. Here, anyone can discover new recipes, share their own creations, and explore dishes from different cultures and cuisines.
+We believe that cooking brings people together. That’s why our platform allows users not only to publish their recipes but also to interact with others by exploring, saving, and enjoying recipes shared by the community.</p>
+    </div>
+</section>
+{% endblock %}
