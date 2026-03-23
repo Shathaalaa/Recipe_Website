@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title_block %}
+Profile
+{% endblock %}
+
+{% block body_class %}profile-page{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile">
+        {% if user_profile.picture %}
+            <div class="profile-img">
+                <img src="{{ user_profile.picture.url }}" alt="Profile picture" width="200">
+            </div>
+        {% else %}
+            <p>No profile picture uploaded.</p>
+        {% endif %}
+
+        <div class="profile-info">
+            <h1>Welcome, {{ request.user.username }}</h1>
+            <p id="user-email-profile">Email: {{ request.user.email }}</p>
+        </div>
+    </div>
+
+    <div class="top-list-profile">
+        <div class="categories-profile">
+            <a class="category-profile {% if selected_section == 'my' %}active{% endif %}" href="{% url 'recipes:profile' 'my' %}">My Recipes</a>
+            <a class="category-profile {% if selected_section == 'liked' %}active{% endif %}" href="{% url 'recipes:profile' 'liked' %}">Liked Recipes</a>
+            <a class="category-profile" href="{% url 'recipes:add_recipe' %}"><i class="fa-solid fa-plus"></i>create recipe</a>
+        </div>
+    </div>
+</div>
+
+    {% if recipes %}
+        <div class="recipes-grid-profile">
+            {% for recipe in recipes %}
+                <div class="recipe-card-profile" data-name="{{ recipe.title|lower }}">
+                    <div class="recipe-user-profile">
+                        <i class="fa-regular fa-user"></i>
+                        {{ recipe.author.username }}
+                    </div>
+
+                    {% if recipe.image %}
+                        <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+                    {% else %}
+                        <p>No image available.</p>
+                    {% endif %}
+
+                    <div class="recipe-info-profile">
+                        <p><strong>Dish:</strong> {{ recipe.title }}</p>
+                        <p><strong>Category:</strong> {{ recipe.category }}</p>
+                        <p><strong>Description:</strong> {{ recipe.description|truncatewords:12 }}</p>
+                        <a href="{% url 'recipes:recipe_detail' recipe.id %}" class="view-btn-profile">
+                            <span class="view-more-profile">view more</span>
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if recipes|length == 0 %}
+        <p id="no-results-profile">No results found.</p>
+    {% endif %}
+
+{% endblock %}
+

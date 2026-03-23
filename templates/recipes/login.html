@@ -7,7 +7,7 @@
 
 {% block body_block %}
 <h1>Sign In</h1>
-<form id="login-form" method="post" action="{% url 'recipes:login' %}">
+<form id="login-form" method="post" action="{% url 'recipes:user_login' %}">
     {% csrf_token %}
     <p>Username: <input type="text" name="username" value="" size="50" /></p>
     <br />

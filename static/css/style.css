@@ -60,7 +60,7 @@ body.homepage::before {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 120%;
     background-color: rgba(28, 36, 31, 0.5);
     z-index: -1;
 }
@@ -99,7 +99,7 @@ nav ul li {
 
 }
 
-nav ul li::before {
+nav ul li:not(.user-menu)::before {
     content: "";
     position: absolute;
     top: 100%;
@@ -111,7 +111,7 @@ nav ul li::before {
     transition: 1s
 }
 
-nav ul li:hover::before {
+nav ul li:not(.user-menu):hover::before {
     width: 100%;
 }
 
@@ -199,7 +199,7 @@ nav a {
     transition: 0.4s
 }
 
-.recipes-grid {
+.recipes-grid, .recipes-grid-profile {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
@@ -207,15 +207,8 @@ nav a {
     margin: auto;
 }
 
-.recipes-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    width: 80%;
-    margin: auto;
-}
 
-.recipe-card {
+.recipe-card, .recipe-card-profile {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -227,18 +220,18 @@ nav a {
     font-family: "Nunito", sans-serif;
 }
 
-.recipe-card:hover {
+.recipe-card:hover, .recipe-card-profile:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
 }
 
-.recipe-card img {
+.recipe-card img, .recipe-card-profile img {
     width: 100%;
     height: 180px;
     object-fit: cover;
 }
 
-#no-results {
+#no-results, #no-results-profile {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -249,18 +242,18 @@ nav a {
     align-items: center;
 }
 
-.recipe-user {
+.recipe-user, .recipe-user-profile {
     font-size: 12px;
     padding: 6px;
     border-bottom: 1px solid #eee;
 }
 
-.recipe-info {
+.recipe-info, .recipe-info-profile {
     padding: 10px;
     font-size: 14px;
 }
 
-.view-btn {
+.view-btn, .view-btn-profile {
     display: flex;
     align-items: end;
     padding: 6px 0;
@@ -270,16 +263,16 @@ nav a {
     text-decoration: none;
 }
 
-.view-more {
+.view-more, .view-more-profile {
     text-decoration: underline;
     transition: 0.3s
 }
 
-.view-btn i {
+.view-btn i, .view-btn-profile i {
     padding-left: 7px;
 }
 
-.view-btn:hover .view-more {
+.view-btn:hover .view-more ,.view-btn-profile:hover .view-more-profile{
     transform: scale(1.08);
 }
 
@@ -599,7 +592,7 @@ h1 {
 
 .signin-signup-container {
     position: absolute;
-    padding: 35px 45px;
+    padding: 35px 35px;
     background-color: rgb(80, 40, 46);
     color: rgb(215, 212, 189);
     border-radius: 12px;
@@ -779,4 +772,152 @@ input[type="file"] {
 #contact_form input[type="submit"]:hover {
     background-color: rgb(121, 74, 79);
     transform: translateY(-2px);
+}
+
+.logo i{
+    color: rgb(215, 212, 189);
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+/* Profile Page */
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    font-size:14px;
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    background: rgb(80, 40, 46);
+}
+.profile h1 {
+    font-family: "Nunito", sans-serif;
+    margin-bottom: 0px !important;
+}
+
+.profile-img img {
+    border-radius: 75%;
+    border: 3px solid #ccc;
+    margin-right: 30px;   
+    width: 100px; 
+    height: 100px;
+}
+
+
+.category-profile {
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    background: rgb(184, 161, 165);
+    font-family: "Nunito", sans-serif;  
+}
+
+.category-profile.active {
+    background: rgb(80, 40, 46);
+    color: rgb(255, 255, 255);
+}
+
+.category-profile:hover {
+    background: rgb(80, 40, 46);
+    color: rgb(255, 255, 255);
+    transition: 0.4s
+}
+
+.profile-container {
+    max-width:600px;
+    width: 85%;
+    margin: 30px auto;  
+    padding: 20px;
+    color: rgb(255, 255, 255);
+    border-radius: 12px;
+    font-family: "Nunito", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+
+.categories-profile{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.user-menu{
+    position:relative;
+    list-style:none
+}
+
+.user-menu a{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    color:rgb(215, 212, 189);
+    text-decoration:none;
+}
+
+.user-menu-btn{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    color:rgb(215, 212, 189);
+    cursor:pointer;
+}
+/* <i class='fas fa-user-alt' style='font-size:28px'></i><i class="fa-solid fa-chevron-down"></i> */
+.fa-user-alt{
+    font-size: 18px !important;
+}
+.fa-chevron-down{
+    font-size: 14px;
+}
+
+.dropdown-menu{
+    display:none;
+    position:absolute;
+    top:120%;
+    right:0;
+    min-width:180px;
+    box-shadow:8px 12px 20px rgba(0,0,0,0.15);
+    overflow:hidden;
+    z-index:1000;
+    border:   1px solid rgb(215, 212, 189);
+}
+
+.dropdown-menu a,
+.dropdown-menu button{
+    display:block;
+    width:100%;
+    padding:16px 18px;
+    text-align:left;
+    text-decoration:none;
+    color:rgb(215, 212, 189); 
+    background: rgb(80, 40, 46);
+    border:none;
+    font-weight:bold;
+    font-family: Nunito;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover{
+    background:rgb(255, 252, 233);
+    transition:0.5s;
+    color: black;
+}
+
+#user-email-profile{
+    font-size: 12px;
+    color: rgb(182, 176, 176);
+}
+.category-profile i {
+    padding-right: 5px;
 }

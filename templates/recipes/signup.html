@@ -9,7 +9,7 @@
 <h1>Sign Up</h1>
 {% if registered %}
 <strong>Thank you for Signing Up!</strong>
-<a href="{% url 'recipes:index' %}">Return to the homepage.</a><br />
+<a href="{% url 'core:index' %}">Return to the homepage.</a><br />
 {% else %}
 <form class="signup-form" id="user_form" method="post" action="{% url 'recipes:signup' %}" enctype="multipart/form-data">
     {% csrf_token %}
@@ -26,7 +26,7 @@
        <i class="fa-brands fa-google"></i> Signup with Google
     </button>
 </form>
-<a class="have-account" href="{% url 'recipes:login'%}">Already have an account?</a>
+<a class="have-account" href="{% url 'recipes:user_login'%}">Already have an account?</a>
 {% endif %}
 {% endblock %}
 
