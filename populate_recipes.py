@@ -13,7 +13,7 @@ def populate():
         {
             "title": "Spicy Arrabbiata Pasta",
             "description": "A delicious spicy Italian pasta dish with garlic, tomatoes, and dried red chili peppers cooked in olive oil.",
-            "image": "https://example.com/pasta.jpg",
+            "image": 'recipe_photos/spicy_pasta.jpeg',
             "category": "Italian",
             "prep_time": 10,
             "cook_time": 30,
@@ -28,7 +28,7 @@ def populate():
         {
             "title": "Classic Caesar Salad",
             "description": "Crisp romaine lettuce and croutons dressed with lemon juice, olive oil, egg, Worcestershire sauce, anchovies, and garlic.",
-            "image": "https://example.com/salad.jpg",
+            "image": 'recipe_photos/caesar-salad.jpeg',
             "category": "Side Dishes",
             "prep_time": 15,
             "cook_time": 0,
@@ -44,7 +44,7 @@ def populate():
         {
             "title": "Chocolate Lava Cake",
             "description": "A popular dessert that combines the elements of a flourless chocolate cake and a soufflé.",
-            "image": "https://example.com/cake.jpg",
+            "image": 'recipe_photos/chocolate lave.jpeg',
             "category": "Desserts",
             "prep_time": 10,
             "cook_time": 30,
@@ -56,12 +56,6 @@ def populate():
             You can now either put the mixture in the fridge, or freezer until you're ready to bake them. Can be cooked straight from frozen for 16 mins, or bake now for 10-12 mins until the tops are firm to the touch but the middles still feel squidgy.
             Carefully run a knife around the edge of each pudding, then turn out onto serving plates and serve with single cream."""
         }
-        # {
-        #     "title": "Homemade Margherita Pizza",
-        #     "description": "Simple pizza with San Marzano tomatoes, mozzarella cheese, fresh basil, salt, and extra-virgin olive oil.",
-        #     "image": "https://example.com/pizza.jpg",
-        #     "category": "Italian"
-        # }
     ]
 
     # 4. Loop through and save to the database
