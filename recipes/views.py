@@ -98,7 +98,7 @@ def user_login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage/
                 login(request,user)
-                return redirect(reverse('recipes:index'))
+                return redirect('index')
             else:
                 # An inactive account was used - no  loggin in!
                 messages.error(request, "you're account is disabled")

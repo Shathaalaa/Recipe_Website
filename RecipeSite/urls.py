@@ -21,6 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from recipes import views
 
+
 urlpatterns = [
     path('recipes/',include('recipes.urls')),
     # The above maps any URLs starting with recipes/ to be handled by rango.

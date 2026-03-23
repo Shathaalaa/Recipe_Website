@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .forms import ContactForm
 from django.core.mail import send_mail
 
@@ -45,6 +45,7 @@ def contact(request):
                 )
                 print(email)
                 print("Message received confirmed")
+                return redirect('contact')
 
         else:
             print(form.errors)
