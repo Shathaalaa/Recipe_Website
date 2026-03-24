@@ -45,7 +45,7 @@ def contact(request):
                 )
                 print(email)
                 print("Message received confirmed")
-                return redirect('contact')
+                return redirect('core:contact')
 
         else:
             print(form.errors)
