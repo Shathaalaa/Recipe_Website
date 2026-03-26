@@ -23,9 +23,7 @@ SITE_ID = 2
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_collected')
 
 
@@ -36,7 +34,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_collected')
 SECRET_KEY = "django-insecure-to)0hludkkll$d8@8mr)f*dq#(p)bzcgojhm*(x94u^9sprixh"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['recipewebwad.pythonanywhere.com','127.0.0.1', 'localhost']
 
@@ -145,7 +143,6 @@ USE_TZ = True
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
-STATIC_URL = "/static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
