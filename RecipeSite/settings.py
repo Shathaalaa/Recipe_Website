@@ -36,7 +36,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_collected')
 SECRET_KEY = "django-insecure-to)0hludkkll$d8@8mr)f*dq#(p)bzcgojhm*(x94u^9sprixh"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['recipewebwad.pythonanywhere.com','127.0.0.1', 'localhost']
 
